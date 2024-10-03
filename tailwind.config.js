@@ -3,10 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      playfair: ["Playfair Display", "serif"],
       poppins: ["Poppins", "sans-serif"],
+      dancing: ['Dancing Script', 'cursive'],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#7C6A46",
+        secondary: "#746341",
+      }
+    },
   },
   plugins: [],
 };

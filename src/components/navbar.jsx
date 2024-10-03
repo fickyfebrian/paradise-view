@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -7,6 +8,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const location = useLocation();
 
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
@@ -54,137 +56,76 @@ export default function Navbar() {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const isActive = (path) => location.pathname === path;
+
   return (
     <>
       <nav
         className={`fixed w-full top-0 left-0 z-40 transition-transform duration-300 ${
           showNavbar ? "transform translate-y-0" : "transform -translate-y-full"
-        } ${isScrolled ? "bg-white shadow-md" : "bg-transparent"}`}
+        } ${isScrolled ? "bg-white" : "bg-transparent"} `}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-32">
-            <div className="">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-0 pl-0">
+          <div className="flex justify-between items-center h-36">
+            {/* Logo */}
+            <div className="flex items-center ml-0">
               <a
-                className="text-4xl font-black font-poppins text-black"
+                className="text-3xl font-black font-poppins text-primary"
                 href="/"
               >
-                CCTV
+                PV
               </a>
             </div>
-            <ul className="hidden md:flex space-x-8 font-poppins">
-              <li className="relative group">
-                <a href="/" className="text-black text-2xl">
-                  Home
-                </a>
-              </li>
-              <li className="relative group" ref={dropdownRef}>
-                <button
-                  onClick={toggleDropdown}
-                  className="flex items-center text-black text-2xl focus:outline-none"
-                >
-                  <span>Paket</span>
-                  <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24.00 24.00"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#000000"
-                    stroke="#000000"
-                    strokeWidth="0.00024"
-                    className="ml-2" // Menambahkan margin left agar ada jarak antara teks dan ikon
-                  >
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    <g
-                      id="SVGRepo_tracerCarrier"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      stroke="#CCCCCC"
-                      strokeWidth="0.144"
-                    ></g>
-                    <g id="SVGRepo_iconCarrier">
-                      <g>
-                        <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </button>
 
-                {dropdownOpen && (
-                  <div className="absolute left-0 w-40 bg-white shadow-lg mt-2 rounded-md z-10">
-                  
-                    <a
-                      href="/paket"
-                      className="block px-4 py-2 text-black hover:bg-gray-100"
-                    >
-                      Paket
-                    </a>
-                    <a
-                      href="/promo-murah"
-                      className="block px-4 py-2 text-black hover:bg-gray-100"
-                    >
-                      Promo Murah
-                    </a>
-                    <a
-                      href="/merk-cctv-1"
-                      className="block px-4 py-2 text-black hover:bg-gray-100"
-                    >
-                      Merk CCTV 1
-                    </a>
-                    <a
-                      href="/merk-cctv-2"
-                      className="block px-4 py-2 text-black hover:bg-gray-100"
-                    >
-                      Merk CCTV 2
-                    </a>
-                  </div>
-                )}
-              </li>
-              <li className="relative group">
-                <a href="/portfolio" className="text-black text-2xl">
-                  Portfolio
-                </a>
-              </li>
-              <li className="relative group">
-                <a href="/klaim" className="text-black text-2xl">
-                  Klaim
-                </a>
-              </li>
-              <li className="relative group">
-                <a href="/about" className="text-black text-2xl">
-                  Tentang Kami
-                </a>
-              </li>
+            {/* Desktop Menu */}
+            <ul className="hidden md:flex space-x-8 font-poppins font-medium gap-10">
+              {[
+                { href: "/", text: "Home" },
+                { href: "/explore", text: "Explore" },
+                { href: "/rooms", text: "Rooms" },
+                { href: "/about", text: "About" },
+                { href: "/contact", text: "Contact" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className={`text-2xl relative ${
+                      isActive(item.href)
+                        ? "text-primary hover:text-secondary"
+                        : "text-black hover:text-secondary"
+                    } transition-colors duration-300 group`}
+                  >
+                    {item.text}
+                    <span className="absolute left-0 bottom-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-all delay-100 duration-300"></span>
+                  </a>
+                </li>
+              ))}
             </ul>
-            <div className="md:hidden">
+
+            {/* Button */}
+            <div className="hidden md:flex items-center">
               <button
-                className="text-black focus:outline-none"
-                onClick={() => setSidebarOpen(true)}
+                className="bg-primary hover:bg-secondary text-white py-2 px-4 h-16 w-52 rounded transition"
+                onClick={() => console.log("Booking now Navbar")}
               >
-                <svg
-                  viewBox="-2.4 -2.4 28.80 28.80"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                >
-                  <g id="Menu / Menu_Alt_01">
-                    <path
-                      d="M12 17H19M5 12H19M5 7H19"
-                      stroke="black"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </g>
-                </svg>
+                Book now
+              </button>
+            </div>
+
+            {/* Hamburger Icon for Mobile */}
+            <div className="md:hidden flex items-center">
+              <button
+                className="text-black text-3xl"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                &#9776;
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Overlay */}
+      {/* Sidebar Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-50"
@@ -192,87 +133,49 @@ export default function Navbar() {
         ></div>
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar Menu */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-[400px] bg-white transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-50 w-64 bg-white transition-transform duration-300 ease-in-out ${
           sidebarOpen ? "transform translate-x-0" : "transform translate-x-full"
-        } md:hidden`}
+        }`}
       >
-        <div className="flex flex-col p-4 space-y-4 text-center items-center justify-center min-h-screen">
+        <div className="flex flex-col p-6 space-y-6">
           <button
-            className="absolute top-4 right-4 text-black text-4xl z-10"
+            className="text-black text-3xl self-end"
             onClick={() => setSidebarOpen(false)}
           >
             &times;
           </button>
-          <a
-            href="/"
-            className="text-black text-2xl"
-            onClick={() => setSidebarOpen(false)}
-          >
-            Home
-          </a>
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className="text-black text-2xl focus:outline-none"
+          {[
+            { href: "/", text: "Home" },
+            { href: "/portfolio", text: "Explore" },
+            { href: "/klaim", text: "Klaim" },
+            { href: "/about", text: "Tentang Kami" },
+            { href: "/contact", text: "Contact" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`text-xl relative ${
+                isActive(item.href)
+                  ? "text-primary hover:text-secondary"
+                  : "text-black hover:text-secondary"
+              } transition-colors duration-300 group`}
+              onClick={() => setSidebarOpen(false)}
             >
-              Paket
-            </button>
-            {dropdownOpen && (
-              <div className="mt-2">
-                 <a
-                  href="/paket"
-                  className="block py-2 text-black"
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  Promo Murah
-                </a>
-                <a
-                  href="/promo-murah"
-                  className="block py-2 text-black"
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  Promo Murah
-                </a>
-                <a
-                  href="/merk-cctv-1"
-                  className="block py-2 text-black"
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  Merk CCTV 1
-                </a>
-                <a
-                  href="/merk-cctv-2"
-                  className="block py-2 text-black"
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  Merk CCTV 2
-                </a>
-              </div>
-            )}
-          </div>
-          <a
-            href="/portfolio"
-            className="text-black text-2xl"
-            onClick={() => setSidebarOpen(false)}
+              {item.text}
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </a>
+          ))}
+          <button
+            className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded transition"
+            onClick={() => {
+              console.log("Booking now Navbar");
+              setSidebarOpen(false);
+            }}
           >
-            Portfolio
-          </a>
-          <a
-            href="/klaim"
-            className="text-black text-2xl"
-            onClick={() => setSidebarOpen(false)}
-          >
-            Klaim
-          </a>
-          <a
-            href="/about"
-            className="text-black text-2xl"
-            onClick={() => setSidebarOpen(false)}
-          >
-            Tentang Kami
-          </a>
+            Book Now
+          </button>
         </div>
       </div>
     </>

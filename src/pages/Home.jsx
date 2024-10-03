@@ -1,9 +1,16 @@
 import React from 'react'
+import Header from '../components/Home/Header'
+import Facilities from '../components/Home/Facilities'
+import LuxuriousRooms from '../components/Home/LuxuriousRooms'
+import Testimonies from '../components/Home/Testimonies'
 
 const Home = () => {
   return (
-    <div className="h-screen flex justify-center text-center items-center text-6xl font-playfair">
-      Its Home!
+    <div className="">
+      <Header />
+      <Facilities />
+      <LuxuriousRooms />
+      <Testimonies />
     </div>
   )
 }
