@@ -78,16 +78,23 @@ const Testimonies = () => {
       {/* Swiper Section */}
       <Swiper
         modules={[Navigation, A11y]}
-        slidesPerView={2.5}
-        spaceBetween={15}
-        className="w-full lg:w-3/4 mx-auto"
+        spaceBetween={20}  // Memberikan jarak antar slide
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2.5,
+          },
+        }}
+        className="w-full"
       >
         {testimoniesData.map((testimony) => (
           <SwiperSlide key={testimony.id}>
-            <div className="rounded-lg py-8 px-6 w-[550px] h-[510px] mx-auto shadow-sm flex flex-col justify-between">
+            <div className="rounded-lg py-6 px-6 w-full lg:w-[650px] bg-gray-50 h-auto mx-auto shadow-sm flex flex-col justify-between">
               {/* Tanggal dan Bintang */}
-              <div className="flex justify-between items-start pt-8 pb-12">
-                <span className="font-poppins font-medium text-black text-l">
+              <div className="flex justify-between items-start pt-8 pb-2 md:pb-8 lg:pb-12">
+                <span className="font-poppins font-medium text-gray-700 text-sm sm:text-sm md:text-l lg:text-xl">
                   {testimony.date}
                 </span>
                 <div className="text-yellow-500">
@@ -99,11 +106,11 @@ const Testimonies = () => {
 
               {/* Ulasan dengan Icon Kutipan */}
               <div className="my-2 text-center flex-1">
-                <FaQuoteLeft className="text-2xl text-secondary mb-2" />
-                <p className="text-2xl font-poppins font-medium text-gray-600">
+                <FaQuoteLeft className="text-sm sm:text-sm md:text-xl lg:text-2xl text-secondary mb-2" />
+                <p className="text-sm sm:text-sm md:text-xl lg:text-2xl font-poppins font-medium text-gray-700">
                   {testimony.review}
                 </p>
-                <FaQuoteRight className="text-2xl text-secondary mb-2 float-right" />
+                <FaQuoteRight className="text-sm sm:text-sm md:text-xl lg:text-2xl text-secondary mb-2 float-right" />
               </div>
 
               {/* User Info */}
@@ -111,7 +118,7 @@ const Testimonies = () => {
                 <img
                   src={testimony.user.image}
                   alt={testimony.user.name}
-                  className="size-14 rounded-full object-cover"
+                  className="w-14 h-14 rounded-full object-cover"
                 />
                 <p className="ml-4 text-gray-800 text-lg font-semibold">
                   {testimony.user.name}

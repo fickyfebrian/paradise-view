@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .marquee {
+    display: flex;
+    animation: marquee 10s linear infinite;
+  }
+  
+  .marquee:hover {
+    animation-play-state: paused;
+  }
+  
+  .marquee img {
+    flex-shrink: 0;
+    margin-right: 50px; /* Sesuaikan dengan space-x-8 dari Tailwind */
+  }

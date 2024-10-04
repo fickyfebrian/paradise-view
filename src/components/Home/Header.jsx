@@ -46,7 +46,7 @@ const Header = () => {
         </div>
 
         {/* Floating Booking Bar */}
-        <div className="absolute left-0 right-0 mx-auto w-11/12 bottom-[-1rem] lg:bottom-[12rem] bg-white rounded-lg px-6 sm:px-12 py-6 z-20">
+        <div className="absolute left-0 right-0 mx-auto w-11/12 bottom-[-1rem] lg:bottom-[6rem] bg-white rounded-lg px-6 sm:px-12 py-6 z-20">
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex items-start space-x-4 justify-center mb-4">
               <FaLocationDot className="text-2xl text-black" />

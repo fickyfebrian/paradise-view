@@ -51,11 +51,11 @@ const Facilities = () => {
         We offer modern (5 star) hotel facilities for your comfort.
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-12 sm:gap-32 md:gap-44 lg:gap-32 ">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-12 sm:gap-32 md:gap-44 lg:gap-14 py-2 px-24">
         {items.map((item) => (
           <div
             key={item.name}
-            className="flex flex-col items-center justify-center rounded-lg bg-gray-100 size-44 gap-0 md:size-80 lg:size-96 p-4 transition-transform duration-300 hover:scale-105"
+            className="flex flex-col items-center justify-center rounded-lg size-44 gap-0 md:size-80 lg:size-96 p-4 transition-transform duration-300 hover:scale-105"
           >
             <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-primary">{item.icon}</div>
             <div className="text-xl md:text-4xl lg:text-2xl font-medium text-primary px-4 py-4">{item.name}</div>
