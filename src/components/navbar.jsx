@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import Logo from "../../public/assets/pv.png";
+
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -73,7 +75,10 @@ export default function Navbar() {
                 className="text-3xl font-black font-poppins text-primary"
                 href="/"
               >
-                PV
+                <img 
+                src={Logo} 
+                style={{ width: "60px" }}
+                />
               </a>
             </div>
 
