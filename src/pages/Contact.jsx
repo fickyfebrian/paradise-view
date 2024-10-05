@@ -1,9 +1,14 @@
 import React from "react";
+import Header from "../components/Contact/Header";
+import Form from "../components/Contact/Form";
+import MapComponent from "../components/Contact/MapComponent";
 
 const Contact = () => {
   return (
-    <div className="h-screen flex justify-center text-center items-center text-6xl font-playfair">
-      Its Contact!
+    <div>
+      <Header />
+      <Form />
+      <MapComponent />
     </div>
   );
 };
