@@ -1,10 +1,13 @@
 import React from "react";
+import Header from "../components/Explore/Header";
+import Tour from "../components/Explore/Tour";
 
 const Explore = () => {
   return (
-    <div className="h-screen flex justify-center text-center items-center text-6xl font-playfair">
-      Its Explore
-    </div>
+   <div>
+    <Header />
+    <Tour />
+   </div>
   );
 };
 
